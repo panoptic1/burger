@@ -24,8 +24,8 @@ var burger = {
         });
     },
 
-    updateOne: function(deletedBurg, callBack){
-        orm.updateOne(deletedBurg, function(res){
+    deleteOne: function(deletedBurg, callBack){
+        orm.deleteOne(deletedBurg, function(res){
             callBack(res);
         });
     }

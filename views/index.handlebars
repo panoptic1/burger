@@ -1,0 +1,51 @@
+<h1>Welcome to BurgerHole!</h1>
+
+<ul>
+    
+    {{#each burgers}}
+        
+        {{#unless this.devoured}}
+
+            <div>
+                <li>
+                {{this.id}}
+                {{this.burger_name}}
+                    <form action="api/burgers/update?_method=PUT" method="POST">
+                        <input type="hidden" name="burger_id" value={{this.id}}>
+                        <button type="submit">Devour</button>
+                    </form>
+                    <form action="api/burgers/{{this.id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="deleted" value="true">
+                        <button type="submit">Delete burger from DB</button>
+                    </form>
+                </li>
+            </div>
+        {{/unless}}
+    {{/each}}
+</ul>
+
+<hr>
+
+<h2>Burgers already committed to the BurgerHole:</h2>
+
+    {{#each burgers}}
+
+        {{#if this.devoured}}
+
+            <li>
+                {{this.id}}
+                {{this.burger_name}}
+                <form action="api/burgers/{{this.id}}?_method=DELETE" method="POST">
+                    <input type="hidden" name="deleted" value="true">
+                    <button type="submit">Delete Burger from DB</button>
+                </form>
+            </li>
+        {{/if}}
+    {{/each}}
+
+<hr>
+
+<form action="api/burgers" method="POST">
+    <input type="text" name="burgerName" id="burger-name">
+    <button type="submit">Add a burger</button>
+</form>
