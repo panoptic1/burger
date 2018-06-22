@@ -1,31 +1,28 @@
-//import the ORM
-var orm = require("../config/orm.js")
-
-//Create code to invoke orm methods
+//import the orm object
+var orm = require("../config/orm.js");
 
 var burger = {
-    //Select all of the burgers 
-    selectAll: function(callBack){
-        orm.selectAll(function(res){
+    //select all of the burgers and their data
+    selectAll: function(callBack) {
+        orm.selectAll("burgers", function(res) {
             callBack(res);
         });
     },
-
-    //Add a new burger to the db
-    insertOne: function(newBurg, callBack){
-        orm.insertOne(newBurg, function(res){
+    //add a new burger to the db
+    insertOne: function(newBurger, callBack) {
+        orm.insertOne("burgers", "burger_name", newBurger, function(res) {
             callBack(res);
         });
     },
-
-    updateOne: function(eatenBurg, callBack){
-        orm.updateOne(eatenBurg, function(res){
+    //update the devoured data in the database - move burger to eaten section
+    updateOne: function(burgerID, callBack) {
+        orm.updateOne("burgers", "devoured", 1, burgerID, function(res) {
             callBack(res);
         });
     },
-
-    deleteOne: function(deletedBurg, callBack){
-        orm.deleteOne(deletedBurg, function(res){
+    //delete the selected burger from the database
+    deleteOne: function(burgerID, callBack) {
+        orm.deleteOne("burgers", burgerID, function(res) {
             callBack(res);
         });
     }

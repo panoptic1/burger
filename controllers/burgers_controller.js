@@ -36,7 +36,7 @@ router.put("/api/burgers/update", function(req, res){
 //DELETE route
 router.delete("/api/burgers/:id", function(req, res){
     console.log(req.params.id);
-    burger.updateOne(req.params.id, function(){
+    burger.deleteOne(req.params.id, function(){
         res.redirect("/");
     });
 });
